@@ -1,0 +1,50 @@
+﻿@model AlzaRestApiApplication.Models.MemberViewModel
+
+@{
+    ViewBag.Title = "Product detail";
+}
+
+@using (Html.BeginForm("Detail item", "Detail"))
+{
+
+    <h2>Product detail</h2>
+
+    if (Html.ValidationSummary() != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @Html.ValidationSummary();
+        </div>
+    }
+    if (Model.Id != 0)
+    {
+
+        <div class="card">
+                <div class="wrapper row">
+                    <div class="preview col-md-6">
+
+                        <div class="preview-pic tab-content">
+                            <div class="tab-pane active" id="pic-1">
+                                <img src="~/Images/shoppingItems/1314071.jpg" /></div>
+                        </div>
+                       
+
+                    </div>
+                    <div class="details col-md-6">
+                        <div class="action updatedata">
+                            @Html.ActionLink("Update product detail", "Edit", new { id = Model.Id })
+                        </div>
+                        <h3 class="product-title">@Model.Name</h3>
+                        
+                        <p class="product-description">@Model.Description</p>
+                        <h4 class="price">price: @Model.Price €</h4>
+                        
+                        @*<div class="action">
+                            <button class="add-to-cart btn btn-default" type="button">add to cart</button>
+                        </div>*@
+                    </div>
+                </div>
+            </div>
+    }
+
+
+}

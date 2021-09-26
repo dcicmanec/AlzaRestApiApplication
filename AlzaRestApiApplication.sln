@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlzaRestApiApplication", "AlzaRestApiApplication\AlzaRestApiApplication.csproj", "{293B1C11-6A40-48A7-977D-096506C563BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlzaRestApiApplication.Tests", "AlzaRestApiApplication.Tests\AlzaRestApiApplication.Tests.csproj", "{51F7BC2F-4E44-45F3-B2CF-73A9C91990FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingItems.Models", "ShoppingItems.Models\ShoppingItems.Models.csproj", "{9FC05250-9E82-4204-BA1F-8AE00E78EB77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingItems.Core", "ShoppingItems.Core\ShoppingItems.Core.csproj", "{40433535-1AF5-4133-9616-6274C6EB64ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{293B1C11-6A40-48A7-977D-096506C563BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{293B1C11-6A40-48A7-977D-096506C563BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{293B1C11-6A40-48A7-977D-096506C563BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{293B1C11-6A40-48A7-977D-096506C563BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51F7BC2F-4E44-45F3-B2CF-73A9C91990FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51F7BC2F-4E44-45F3-B2CF-73A9C91990FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51F7BC2F-4E44-45F3-B2CF-73A9C91990FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51F7BC2F-4E44-45F3-B2CF-73A9C91990FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FC05250-9E82-4204-BA1F-8AE00E78EB77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FC05250-9E82-4204-BA1F-8AE00E78EB77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FC05250-9E82-4204-BA1F-8AE00E78EB77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FC05250-9E82-4204-BA1F-8AE00E78EB77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40433535-1AF5-4133-9616-6274C6EB64ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40433535-1AF5-4133-9616-6274C6EB64ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40433535-1AF5-4133-9616-6274C6EB64ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40433535-1AF5-4133-9616-6274C6EB64ED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
+	EndGlobalSection
+EndGlobal

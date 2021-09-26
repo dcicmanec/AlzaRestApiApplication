@@ -1,0 +1,68 @@
+﻿@model AlzaRestApiApplication.Models.MemberViewModel
+@{
+    ViewBag.Title = "Edit product detail";
+}
+@using (Html.BeginForm("Edit product detail", "Home/Edit"))
+{
+
+    <script type="text/javascript">
+    function next() {
+        var jqxhr = $.get('http://localhost:50868/api/Cricketers/GetCricketerList?pn=1&ps=3')
+
+        //var jqxhr = $.post('http://localhost:50868/api/Cricketers/AddCricketerInfo', { "ps": 3, "pn": 1 })
+        return true;
+    };
+    </script>
+
+    <h2>Edit product detail</h2>
+
+    if (Html.ValidationSummary() != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @Html.ValidationSummary();
+        </div>
+    }
+    if (Model.Id != 0)
+    {
+            @Html.AntiForgeryToken()
+            <div class="card">
+                <div class="row">
+
+                    <div>
+                        <div class="action updatedata">
+                            @Html.ActionLink("Back to product detail", "Detail", new { id = Model.Id })
+                        </div>
+                        @Html.HiddenFor(model => model.Id)
+                        @Html.HiddenFor(model => model.ImgUri)
+                        <div class="spacebottom">
+                            @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.Name)
+                                @Html.ValidationMessageFor(model => model.Name)
+                            </div>
+                        </div>
+                        <div class="spacebottom">
+                            @Html.LabelFor(model => model.Description, new { @class = "control-label" })
+                            <div>
+                                @Html.TextAreaFor(model => model.Description)
+                                @Html.ValidationMessageFor(model => model.Description)
+                            </div>
+                        </div>
+                        <div class="spacebottom">
+                            @Html.LabelFor(model => model.Price, new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.Price)
+                                @Html.ValidationMessageFor(model => model.Price)
+                            </div>
+                        </div>
+
+                        <div class="action">
+                            <input type="submit" value="Update" class="add-to-cart btn btn-default" style="width:200px" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+}

@@ -1,0 +1,71 @@
+﻿@using AlzaRestApiApplication.Models
+
+@model IEnumerable<AlzaRestApiApplication.Models.MemberViewModel>
+
+@{
+    ViewBag.Title = "Shopping Items";
+    var page = (PageViewModel)ViewData["Message"];
+}
+
+
+@using (Html.BeginForm("Index", "Home"))
+{
+
+
+    <h2>Shopping Items</h2>
+
+    if (Html.ValidationSummary() != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @Html.ValidationSummary();
+        </div>
+    }
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "Detail", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+
+    if (page != null)
+    {
+        <span>@Html.ActionLink("< Prev page", "Index", new { id = page.PageNumberPrev }) </span>
+        <span>
+            |
+        </span>
+        <span>@Html.ActionLink("All Items", "Index", new { id = 0 }) </span>
+        <span>
+            |
+        </span>
+        <span>@Html.ActionLink("Next page >", "Index", new { id = page.PageNumberNext }) </span>
+    }
+
+
+}
