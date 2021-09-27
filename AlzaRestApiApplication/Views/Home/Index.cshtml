@@ -20,52 +20,70 @@
             @Html.ValidationSummary();
         </div>
     }
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th></th>
-        </tr>
 
-        @if (Model != null)
-        {
-            foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Details", "Detail", new { id = item.Id })
-                    </td>
-                </tr>
-            }
-        }
 
-    </table>
+<div class="container homecont">
 
-    if (page != null)
+    @if (Model != null)
     {
-        <span>@Html.ActionLink("< Prev page", "Index", new { id = page.PageNumberPrev }) </span>
-        <span>
-            |
-        </span>
-        <span>@Html.ActionLink("All Items", "Index", new { id = 0 }) </span>
-        <span>
-            |
-        </span>
-        <span>@Html.ActionLink("Next page >", "Index", new { id = page.PageNumberNext }) </span>
+        foreach (var item in Model)
+        {
+
+            <div class="col-xs-12 col-md-6">
+                <!-- First product box start here-->
+                <div class="prod-info-main prod-wrap clearfix">
+                    <div class="row">
+                        <div class="col-md-5 col-sm-12 col-xs-12">
+                            <div class="product-image">
+                                <img src="~/Images/shoppingItems/1314071.jpg" class="img-responsive" />
+                            </div>
+                        </div>
+                        <div class="col-md-7 col-sm-12 col-xs-12">
+                            <div class="product-deatil">
+                                <h5 class="name">
+                                    @Html.ActionLink(item.Name, "Detail", new { id = item.Id })
+                                </h5>
+                                <p class="price-container">
+                                    <span>Price: @Html.DisplayFor(modelItem => item.Price) €</span>
+                                </p>
+                                <span class="tag1"></span>
+                            </div>
+                            <div class="product-info smart-form">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a href="javascript:void(0);" class="btn btn-danger">Detail</a>
+                                        <a href="javascript:void(0);" class="btn btn-info">Edit</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end product -->
+            </div>
+        }
     }
 
 
-}
+
+</div>
+
+
+    if (page != null)
+    {
+    <span>@Html.ActionLink("< Prev page", "Index", new { id = page.PageNumberPrev }) </span>
+    <span>
+        |
+    </span>
+    <span>@Html.ActionLink("All Items", "Index", new { id = 0 }) </span>
+    <span>
+        |
+    </span>
+    <span>@Html.ActionLink("Next page >", "Index", new { id = page.PageNumberNext }) </span>
+
+
+
+        }
+
+
+        }

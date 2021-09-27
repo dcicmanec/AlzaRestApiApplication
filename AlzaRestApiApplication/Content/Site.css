@@ -12,6 +12,46 @@
     color:red;
 }
 
+.prod-info-main {
+    margin-bottom: 20px;
+    margin-top: 10px;
+    background: #fff;
+    padding: 0px;
+    background-color:#EEE
+}
+
+.homecont {
+    background-color: #EEE;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 12px;
+    padding-bottom: 5px;
+}
+
+.prod-info-main .product-image {
+    display: block;
+    min-height: 150px;
+    overflow: hidden;
+    position: relative;
+    background-color:white;
+}
+
+.product-deatil .price-container {
+    font-size: 18px;
+    margin: 0;
+    font-weight: 300;
+}
+
+.product-deatil .name {
+    padding-right: 20px;
+}
+
+.product-info.smart-form .btn {
+    padding: 6px 12px;
+    margin-left: 0px;
+    margin-top: 10px
+}
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
