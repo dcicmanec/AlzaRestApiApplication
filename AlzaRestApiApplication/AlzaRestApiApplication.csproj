@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -257,7 +258,29 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Images\shoppingItems\1314071.jpg" />
+    <Content Include="Images\shoppingItems\1.jpg" />
+    <Content Include="Images\shoppingItems\10.jpg" />
+    <Content Include="Images\shoppingItems\11.jpg" />
+    <Content Include="Images\shoppingItems\12.jpg" />
+    <Content Include="Images\shoppingItems\13.jpg" />
+    <Content Include="Images\shoppingItems\14.jpg" />
+    <Content Include="Images\shoppingItems\16.jpg" />
+    <Content Include="Images\shoppingItems\17.jpg" />
+    <Content Include="Images\shoppingItems\18.jpg" />
+    <Content Include="Images\shoppingItems\19.jpg" />
+    <Content Include="Images\shoppingItems\2.jpg" />
+    <Content Include="Images\shoppingItems\20.jpg" />
+    <Content Include="Images\shoppingItems\21.jpg" />
+    <Content Include="Images\shoppingItems\22.jpg" />
+    <Content Include="Images\shoppingItems\23.jpg" />
+    <Content Include="Images\shoppingItems\24.jpg" />
+    <Content Include="Images\shoppingItems\3.jpg" />
+    <Content Include="Images\shoppingItems\4.jpg" />
+    <Content Include="Images\shoppingItems\5.jpg" />
+    <Content Include="Images\shoppingItems\6.jpg" />
+    <Content Include="Images\shoppingItems\7.jpg" />
+    <Content Include="Images\shoppingItems\8.jpg" />
+    <Content Include="Images\shoppingItems\9.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -286,6 +309,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.lazy.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />

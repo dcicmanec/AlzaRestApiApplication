@@ -21,69 +21,76 @@
         </div>
     }
 
+    <script type="text/javascript">
+        $(function () {
+            $('.lazy').lazy();
+        });
+    </script>
 
-<div class="container homecont">
 
-    @if (Model != null)
-    {
-        foreach (var item in Model)
+    <div class="container homecont" id="lazyScrollLoading_ImageMode">
+
+        @if (Model != null)
         {
-
-            <div class="col-xs-12 col-md-6">
-                <!-- First product box start here-->
-                <div class="prod-info-main prod-wrap clearfix">
-                    <div class="row">
-                        <div class="col-md-5 col-sm-12 col-xs-12">
-                            <div class="product-image">
-                                <img src="~/Images/shoppingItems/1314071.jpg" class="img-responsive" />
+            foreach (var item in Model)
+            {
+                <div class="col-xs-12 col-md-6">
+                    <!-- First product box start here-->
+                    <div class="prod-info-main prod-wrap clearfix">
+                        <div class="row">
+                            <div class="col-md-5 col-sm-12 col-xs-12">
+                                <div class="product-image">
+                                    <img data-src="/Images/shoppingItems/@item.ImgUri" alt="@item.Name" class="img-responsive lazy" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-7 col-sm-12 col-xs-12">
-                            <div class="product-deatil">
-                                <h5 class="name">
-                                    @Html.ActionLink(item.Name, "Detail", new { id = item.Id })
-                                </h5>
-                                <p class="price-container">
-                                    <span>Price: @Html.DisplayFor(modelItem => item.Price) €</span>
-                                </p>
-                                <span class="tag1"></span>
-                            </div>
-                            <div class="product-info smart-form">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <a href="javascript:void(0);" class="btn btn-danger">Detail</a>
-                                        <a href="javascript:void(0);" class="btn btn-info">Edit</a>
+                            <div class="col-md-7 col-sm-12 col-xs-12">
+                                <div class="product-deatil">
+                                    <h5 class="name">
+                                        @Html.ActionLink(item.Name, "Detail", new { id = item.Id })
+                                    </h5>
+                                    <p class="price-container">
+                                        <span>Price: @Html.DisplayFor(modelItem => item.Price) €</span>
+                                    </p>
+                                    <span class="tag1"></span>
+                                </div>
+                                <div class="product-info smart-form">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            @Html.ActionLink("Detail", "Detail", new { id = item.Id }, new { @class = "btn btn-danger" })
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-info" })
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- end product -->
                 </div>
-                <!-- end product -->
-            </div>
+            }
         }
-    }
 
 
 
-</div>
+    </div>
+
+
 
 
     if (page != null)
     {
-    <span>@Html.ActionLink("< Prev page", "Index", new { id = page.PageNumberPrev }) </span>
-    <span>
-        |
-    </span>
-    <span>@Html.ActionLink("All Items", "Index", new { id = 0 }) </span>
-    <span>
-        |
-    </span>
-    <span>@Html.ActionLink("Next page >", "Index", new { id = page.PageNumberNext }) </span>
+        <span>@Html.ActionLink("< Prev page", "Index", new { id = page.PageNumberPrev }) </span>
+        <span>
+            |
+        </span>
+        <span>@Html.ActionLink("All Items", "Index", new { id = 0 }) </span>
+        <span>
+            |
+        </span>
+        <span>@Html.ActionLink("Next page >", "Index", new { id = page.PageNumberNext }) </span>
 
 
 
-        }
+    }
 
 
-        }
+}

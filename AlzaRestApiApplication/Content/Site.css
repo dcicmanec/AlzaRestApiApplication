@@ -20,6 +20,11 @@
     background-color:#EEE
 }
 
+img.lazy {
+ 
+    display: block;
+}
+
 .homecont {
     background-color: #EEE;
     margin-top: 20px;
