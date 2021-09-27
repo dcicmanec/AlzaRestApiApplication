@@ -1,4 +1,5 @@
 ﻿@using AlzaRestApiApplication.Models
+@using System.Configuration;
 
 @model IEnumerable<AlzaRestApiApplication.Models.MemberViewModel>
 
@@ -78,15 +79,15 @@
 
     if (page != null)
     {
-        <span>@Html.ActionLink("< Prev page", "Index", new { id = page.PageNumberPrev }) </span>
+        <span>@Html.ActionLink("< Prev page", "Index", new { pageNumber = page.PageNumberPrev, pageSize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["PageSize"]) }) </span>
         <span>
             |
         </span>
-        <span>@Html.ActionLink("All Items", "Index", new { id = 0 }) </span>
+        <span>@Html.ActionLink("All Items", "Index", new { pageNumber = 0, pageSize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["PageSize"]) }) </span>
         <span>
             |
         </span>
-        <span>@Html.ActionLink("Next page >", "Index", new { id = page.PageNumberNext }) </span>
+        <span>@Html.ActionLink("Next page >", "Index", new { pageNumber = page.PageNumberNext, pageSize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["PageSize"]) }) </span>
 
 
 

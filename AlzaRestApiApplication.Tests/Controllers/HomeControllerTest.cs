@@ -15,11 +15,10 @@ namespace AlzaRestApiApplication.Tests.Controllers
             HomeController controller = new HomeController();
 
             // Act
-            ViewResult result = controller.Index() as ViewResult;
+            ViewResult result = controller.Index(1,10, true) as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual("Home Page", result.ViewBag.Title);
         }
     }
 }
