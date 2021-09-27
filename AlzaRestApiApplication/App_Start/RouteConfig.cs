@@ -18,6 +18,11 @@ namespace AlzaRestApiApplication
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                name: "Swagger",
+                url: "Swagger",
+                defaults: new { controller = "Home", action = "Swagger", id = UrlParameter.Optional }
+            );
         }
     }
 }
