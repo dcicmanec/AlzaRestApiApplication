@@ -11,25 +11,10 @@ namespace AlzaRestApiApplication.Controllers
 {
     public class ShoppingItemsController : ApiController
     {
-
         #region Variable  
         HttpResponseMessage response;
         ShoppingItemsBL shoppingItemsBL;
         #endregion #region Public Method  
-
-        //[HttpGet]
-        //public async Task<IActionResult> GetAll([FromQuery] PaginationFilter filter)
-        //{
-        //    var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
-        //    var pagedData = await context.Customers
-        //        .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
-        //        .Take(validFilter.PageSize)
-        //        .ToListAsync();
-        //    var totalRecords = await context.Customers.CountAsync();
-        //    return Ok(new PagedResponse<List<Customer>>(pagedData, validFilter.PageNumber, validFilter.PageSize));
-        //}
-
-
         ///<summary>  
         /// This method is used to get Shopping list  
         ///</summary>  
@@ -68,7 +53,6 @@ namespace AlzaRestApiApplication.Controllers
             }
             return response;
         }
-
         ///<summary>  
         /// This method is used to get Shopping list by id  
         ///</summary>  
@@ -95,9 +79,6 @@ namespace AlzaRestApiApplication.Controllers
             }
             return response;
         }
-
-        //#endregion 
-
         ///<summary>  
         /// This method is used to update Shopping item info in the database.  
         ///</summary>  
@@ -134,58 +115,6 @@ namespace AlzaRestApiApplication.Controllers
                         ObjResult = new Result();
                         ObjResult.Status = result;
                         ObjResult.Message = "Record Not Added!!";
-                        response = Request.CreateResponse<Result>(HttpStatusCode.OK, ObjResult);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                ObjResult = new Result();
-                ObjResult.Status = 0;
-                ObjResult.Message = ex.Message;
-                response = Request.CreateResponse(HttpStatusCode.InternalServerError, ObjResult);
-            }
-            return response;
-        }
-        ///<summary>  
-        /// This method is used to delete the Shopping item info  
-        ///</summary>  
-        ///<param name="ShoppingItemId"></param>  
-        ///<returns></returns>  
-        [HttpDelete, ActionName("DeleteShoppingItemInfo")]
-        public HttpResponseMessage DeleteShoppingItemInfo(int ShoppingItemId)
-        {
-            Result ObjResult;
-            int result;
-            shoppingItemsBL = new ShoppingItemsBL();
-
-            try
-            {
-                ShoppingItemsProfile shoppingItem = new ShoppingItemsProfile();
-                shoppingItem.Id = ShoppingItemId;
-
-                result = shoppingItemsBL.DeleteShoppingListInfo(shoppingItem);
-                if (result > 0)
-                {
-                    if (result == 1)
-                    {
-                        ObjResult = new Result();
-                        ObjResult.Status = result;
-                        ObjResult.Message = "Record Deleted Successfully!!";
-                        response = Request.CreateResponse<Result>(HttpStatusCode.OK, ObjResult);
-                    }
-                    else if (result == 2)
-                    {
-                        ObjResult = new Result();
-                        ObjResult.Status = result;
-                        ObjResult.Message = "Record does not Exists!!";
-                        response = Request.CreateResponse<Result>(HttpStatusCode.OK, ObjResult);
-                    }
-                    else
-                    {
-                        ObjResult = new Result();
-                        ObjResult.Status = result;
-                        ObjResult.Message = "Record Not Found!!";
                         response = Request.CreateResponse<Result>(HttpStatusCode.OK, ObjResult);
                     }
                 }

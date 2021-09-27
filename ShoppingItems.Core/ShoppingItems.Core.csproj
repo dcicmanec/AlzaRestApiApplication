@@ -50,7 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\ShoppingItemsBL.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="DAL\ShoppingItemsDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

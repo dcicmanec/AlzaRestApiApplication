@@ -7,9 +7,6 @@ namespace ShoppingItems.Core.BL
 {
     public class ShoppingItemsBL
     {
-
-
-
         ///<summary>  
         /// This method is used to get the Shopping Item list  
         ///</summary>  
@@ -55,24 +52,6 @@ namespace ShoppingItems.Core.BL
             try
             {
                 result = new ShoppingItemsDAL().UpdateShoppingItemsInfo(shoppingItem);
-            }
-            catch (Exception)
-            {
-                return 0;
-            }
-            return result;
-        }
-        ///<summary>  
-        /// This method is used to delete Shopping item info  
-        ///</summary>  
-        ///<param name="shoppingItem"></param>  
-        ///<returns></returns>  
-        public int DeleteShoppingListInfo(ShoppingItemsProfile shoppingItem)
-        {
-            int result = 0;
-            try
-            {
-                result = new ShoppingItemsDAL().DeleteShoppingListInfo(shoppingItem);
             }
             catch (Exception)
             {

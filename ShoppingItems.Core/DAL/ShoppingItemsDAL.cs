@@ -81,7 +81,7 @@ namespace ShoppingItems.Core.DAL
                 }
                 return obj;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return obj;
             }
@@ -108,12 +108,10 @@ namespace ShoppingItems.Core.DAL
                 catch (Exception ex)
                 {
                     throw ex;
-                    return null;
                 }
             }
             return objGetShoppingItems;
         }
-
         ///<summary>  
         /// This method is used to get Shopping item details by id    
         ///</summary>  
@@ -135,13 +133,12 @@ namespace ShoppingItems.Core.DAL
                 catch (Exception ex)
                 {
                     throw ex;
-                    return null;
                 }
             }
             return objShoppingListDetails;
         }
         ///<summary>  
-        /// This method is used to add update Shopping item info  
+        /// This method is used to update Shopping item info  
         ///</summary>  
         ///<param name="shoppingItem"></param>  
         ///<returns></returns>  
@@ -161,31 +158,6 @@ namespace ShoppingItems.Core.DAL
                 if (string.IsNullOrEmpty(shoppingItem.Description)) objDB.AddInParameter(objCMD, "@Descpription", DbType.String, DBNull.Value);
                 else objDB.AddInParameter(objCMD, "@Description", DbType.String, shoppingItem.Description);
                 objDB.AddInParameter(objCMD, "@Status", DbType.Int32, 3);
-                try
-                {
-                    objDB.ExecuteNonQuery(objCMD);
-                    result = Convert.ToInt32(objDB.GetParameterValue(objCMD, "@Status"));
-                }
-                catch (Exception ex)
-                {
-                    throw;
-                }
-            }
-            return result;
-        }
-        ///<summary>  
-        /// This method is used to delete Shopping Item info  
-        ///</summary>  
-        ///<param name="shoppingItem"></param>  
-        ///<returns></returns>  
-        public int DeleteShoppingListInfo(ShoppingItemsProfile shoppingList)
-        {
-            int result = 0;
-            objDB = new SqlDatabase(ConnectionString);
-            using (DbCommand objCMD = objDB.GetStoredProcCommand("CC_DeleteShoppingItemsProfile"))
-            {
-                objDB.AddInParameter(objCMD, "@Id", DbType.Int32, shoppingList.Id);
-                objDB.AddOutParameter(objCMD, "@Status", DbType.Int16, 0);
                 try
                 {
                     objDB.ExecuteNonQuery(objCMD);
