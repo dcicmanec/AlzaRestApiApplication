@@ -1,6 +1,5 @@
 ﻿using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using AlzaRestApiApplication;
 using AlzaRestApiApplication.Controllers;
 
 namespace AlzaRestApiApplication.Tests.Controllers
@@ -15,7 +14,7 @@ namespace AlzaRestApiApplication.Tests.Controllers
             HomeController controller = new HomeController();
 
             // Act
-            ViewResult result = controller.Index(1,10, true) as ViewResult;
+            ViewResult result = controller.Index(1, true) as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);

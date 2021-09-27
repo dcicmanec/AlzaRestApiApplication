@@ -79,15 +79,15 @@
 
     if (page != null)
     {
-        <span>@Html.ActionLink("< Prev page", "Index", new { pageNumber = page.PageNumberPrev, pageSize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["PageSize"]) }) </span>
+        <span>@Html.ActionLink("< Prev page", "Index", new { Id = page.PageNumberPrev }) </span>
         <span>
             |
         </span>
-        <span>@Html.ActionLink("All Items", "Index", new { pageNumber = 0, pageSize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["PageSize"]) }) </span>
+        <span>@Html.ActionLink("All Items", "Index", new { Id = 0 }) </span>
         <span>
             |
         </span>
-        <span>@Html.ActionLink("Next page >", "Index", new { pageNumber = page.PageNumberNext, pageSize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["PageSize"]) }) </span>
+        <span>@Html.ActionLink("Next page >", "Index", new { Id = page.PageNumberNext }) </span>
 
 
 

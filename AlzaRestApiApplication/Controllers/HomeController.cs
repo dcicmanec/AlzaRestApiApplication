@@ -45,8 +45,6 @@ namespace AlzaRestApiApplication.Controllers
 
         public ActionResult Edit(int id)
         {
-            // TODO: don't hardcode, fetch from repository
-
             MemberViewModel members = new MemberViewModel();
 
             using (var client = new HttpClient())
@@ -90,8 +88,7 @@ namespace AlzaRestApiApplication.Controllers
 
         public ActionResult Detail(int id)
         {
-            // TODO: don't hardcode, fetch from repository
-
+           
             MemberViewModel members = new MemberViewModel();
 
             using (var client = new HttpClient())
@@ -130,25 +127,26 @@ namespace AlzaRestApiApplication.Controllers
             return View(members);
         }
 
-        public ActionResult Index(int pageNumber = 1, int pageSize = 10, bool testing = false)
+        public ActionResult Index(int Id = 1, bool testing = false)
         {
             IEnumerable<MemberViewModel> members = null;
 
+            //mockup data for unit testing
             if (testing)
             {
                 members = JsonConvert.DeserializeObject<IEnumerable<MemberViewModel>>("[{'MaxPageSize': '22','Status': '0','Description': 'Najtenší a najlahší notebook','Id': '1','ImgUri': '1.jpg','Name': 'Macbook Air 13 M1 Vesmírne sivý','Price': '999'}]");
-
                 return View(members);
             }
             else
             {
-
                 using (var client = new HttpClient())
                 {
 
+                    int pageSize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["PageSize"]);
+
                     UriBuilder builder = new UriBuilder("http://" + Request.Url.Authority + "/api/ShoppingItems/GetShoppingList");
 
-                    builder.Query = "pageNumber=" + pageNumber + "&pageSize=" + pageSize;
+                    builder.Query = "pageNumber=" + Id + "&pageSize=" + pageSize;
 
                     var responseTask = client.GetAsync(builder.Uri);
                     responseTask.Wait();
@@ -164,16 +162,16 @@ namespace AlzaRestApiApplication.Controllers
                         readTask.Wait();
 
                         // Setup paging links
-                        int pageNext = pageNumber;
-                        int pagePrev = pageNumber;
+                        int pageNext = Id;
+                        int pagePrev = Id;
 
                         int MaxPageSize = readTask.Result[0].MaxPageSize;
-                        if ((pageSize * pageNumber) < MaxPageSize)
+                        if ((pageSize * Id) < MaxPageSize)
                         {
                             pageNext++;
                         }
 
-                        if (pageNumber > 1)
+                        if (Id > 1)
                         {
                             pagePrev--;
                         }
