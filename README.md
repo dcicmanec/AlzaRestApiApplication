@@ -9,6 +9,10 @@ Solution consist of 5 individual projects
 4. ShoppingItems.Database - SQL Server Database project representing Structure and Data of simple ShoppingItems database.
 5. AlzaRestApiApplication.Tests - Project used for Unit testing
 
+Configuration
+- Please modify appSettings in Web.config <add key="RestApiHost" value="http://localhost:63895" /> for main AlzaRestApiApplication project
+- Please modify appSettings in App.config <add key="RestApiHost" value="http://localhost:63895" /> for AlzaRestApiApplication.Tests project
+
 Rest Api Swagger documentation can be downloaded from link:
 
 - https://app.swaggerhub.com/apis-docs/test62993/AlzaRestApi/1.0.0
@@ -26,6 +30,6 @@ Data layer
 
 Paging configuration
 
-- To change number of records displayed on one page you can modify appSettings parameter 'PageSize' in Web.config
+- To change number of records displayed on one page you can modify appSettings parameter 'PageSize' <add key="PageSize" value="10" /> in Web.config
 
 

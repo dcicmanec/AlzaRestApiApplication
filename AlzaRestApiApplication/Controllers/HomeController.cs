@@ -6,7 +6,7 @@ using System.Linq;
 using System.Configuration;
 using AlzaRestApiApplication.Models;
 using RichardSzalay.MockHttp;
-using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace AlzaRestApiApplication.Controllers
 {
@@ -25,7 +25,7 @@ namespace AlzaRestApiApplication.Controllers
                 using (var client = new HttpClient())
                 {
 
-                    client.BaseAddress = new Uri("http://" + Request.Url.Authority + "/api/ShoppingItems/UpdateShoppingItemInfo");
+                    client.BaseAddress = new Uri(ConfigurationManager.AppSettings["RestApiHost"] + "/api/ShoppingItems/UpdateShoppingItemInfo");
 
                     //HTTP POST
                     var postTask = client.PostAsJsonAsync<MemberViewModel>("formData", modelUpdate);
@@ -50,7 +50,7 @@ namespace AlzaRestApiApplication.Controllers
 
             using (var client = new HttpClient())
             {
-                UriBuilder builder = new UriBuilder("http://" + Request.Url.Authority + "/api/ShoppingItems/GetShoppingListInfoById");
+                UriBuilder builder = new UriBuilder(ConfigurationManager.AppSettings["RestApiHost"] + "/api/ShoppingItems/GetShoppingListInfoById");
 
                 builder.Query = "ShoppingListId=" + id;
 
@@ -94,7 +94,7 @@ namespace AlzaRestApiApplication.Controllers
 
             using (var client = new HttpClient())
             {
-                UriBuilder builder = new UriBuilder("http://" + Request.Url.Authority + "/api/ShoppingItems/GetShoppingListInfoById");
+                UriBuilder builder = new UriBuilder(ConfigurationManager.AppSettings["RestApiHost"] + "/api/ShoppingItems/GetShoppingListInfoById");
 
                 builder.Query = "ShoppingListId=" + id;
 
@@ -128,81 +128,84 @@ namespace AlzaRestApiApplication.Controllers
             return View(members);
         }
 
-        public ActionResult Index(int Id = 1, bool testing = false)
+        public ActionResult Index(int Id = 1, bool mockHttpClient = false)
         {
             IEnumerable<MemberViewModel> members = null;
 
             //mockup data for unit testing
-            if (testing)
+            using (var client = mockHttpClient ? new HttpClient(mockHttpClientHandler()) : new HttpClient())
             {
-                members = JsonConvert.DeserializeObject<IEnumerable<MemberViewModel>>("[{'MaxPageSize': '22','Status': '0','Description': 'Najtenší a najlahší notebook','Id': '1','ImgUri': '1.jpg','Name': 'Macbook Air 13 M1 Vesmírne sivý','Price': '999'}]");
-                return View(members);
-            }
-            else
-            {
-                using (var client = new HttpClient())
+
+                int pageSize = int.Parse(ConfigurationManager.AppSettings["PageSize"]);
+
+                UriBuilder builder = new UriBuilder(ConfigurationManager.AppSettings["RestApiHost"] + "/api/ShoppingItems/GetShoppingList");
+
+                builder.Query = "pageNumber=" + Id + "&pageSize=" + pageSize;
+
+                var responseTask = client.GetAsync(builder.Uri);
+                responseTask.Wait();
+
+                //To store result of web api response.   
+                var result = responseTask.Result;
+
+                //If success received   
+                if (result.IsSuccessStatusCode)
                 {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    readTask.Wait();
 
-                    int pageSize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["PageSize"]);
+                    // Parse JSON result
+                    JObject o = JObject.Parse("{'d': " + readTask.Result + "}");
+                    JArray jsonArray = (JArray)o["d"];
+                    IList<MemberViewModel> readTaskConverted = jsonArray.ToObject<IList<MemberViewModel>>();
 
-                    UriBuilder builder = new UriBuilder("http://" + Request.Url.Authority + "/api/ShoppingItems/GetShoppingList");
-
-                    builder.Query = "pageNumber=" + Id + "&pageSize=" + pageSize;
-
-                    var responseTask = client.GetAsync(builder.Uri);
-                    responseTask.Wait();
-
-                    //To store result of web api response.   
-                    var result = responseTask.Result;
-
-                    //If success received   
-                    if (result.IsSuccessStatusCode)
+                    // Setup paging links
+                    int pageNext = Id;
+                    int pagePrev = Id;
+                    int MaxPageSize = readTaskConverted[0].MaxPageSize;
+                    if ((pageSize * Id) < MaxPageSize)
                     {
+                        pageNext++;
+                    }
 
-                        var readTask = result.Content.ReadAsAsync<IList<MemberViewModel>>();
-                        readTask.Wait();
-
-                        // Setup paging links
-                        int pageNext = Id;
-                        int pagePrev = Id;
-
-                        int MaxPageSize = readTask.Result[0].MaxPageSize;
-                        if ((pageSize * Id) < MaxPageSize)
-                        {
-                            pageNext++;
-                        }
-
-                        if (Id > 1)
-                        {
-                            pagePrev--;
-                        }
-                        else
-                        {
-                            pagePrev = 1;
-                        }
-
-                        members = readTask.Result;
-
-
-                        PageViewModel rec = new PageViewModel
-                        {
-                            PageNumberNext = pageNext,
-                            PageNumberPrev = pagePrev,
-                            PageSize = pageSize
-                        };
-
-                        ViewBag.Message = rec;
+                    if (Id > 1)
+                    {
+                        pagePrev--;
                     }
                     else
                     {
-                        //Error response received   
-                        members = Enumerable.Empty<MemberViewModel>();
-                        ModelState.AddModelError(string.Empty, "Server error try after some time.");
+                        pagePrev = 1;
                     }
-                }
-                return View(members);
 
+                    members = readTaskConverted;
+
+                    PageViewModel rec = new PageViewModel
+                    {
+                        PageNumberNext = pageNext,
+                        PageNumberPrev = pagePrev,
+                        PageSize = pageSize
+                    };
+
+                    ViewBag.Message = rec;
+                }
+                else
+                {
+                    //Error response received   
+                    members = Enumerable.Empty<MemberViewModel>();
+                    ModelState.AddModelError(string.Empty, "Server error try after some time.");
+                }
             }
+            return View(members);
+        }
+
+        private HttpMessageHandler mockHttpClientHandler()
+        {
+            var mockHttp = new MockHttpMessageHandler();
+            mockHttp.When(ConfigurationManager.AppSettings["RestApiHost"] + "/api/ShoppingItems/GetShoppingList")
+                    .Respond("application/json", @"[{'Id':1,'Name':'Macbook Air 13\' M1 Vesmírne sivý','ImgUri':'1.jpg','Price':999.00,'Description':'Najtenší a najlahší notebook','Status':0,'Message':null,'MaxPageSize':22}]"); // Respond with JSON
+
+            return mockHttp;
+
         }
     }
 }
