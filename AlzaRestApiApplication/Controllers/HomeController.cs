@@ -44,11 +44,12 @@ namespace AlzaRestApiApplication.Controllers
         }
 
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id, bool mockHttpClient = false)
         {
             MemberViewModel members = new MemberViewModel();
 
-            using (var client = new HttpClient())
+            //mockup data for unit testing
+            using (var client = mockHttpClient ? new HttpClient(mockHttpClientHandler()) : new HttpClient())
             {
                 UriBuilder builder = new UriBuilder(ConfigurationManager.AppSettings["RestApiHost"] + "/api/ShoppingItems/GetShoppingListInfoById");
 
@@ -87,12 +88,12 @@ namespace AlzaRestApiApplication.Controllers
             return View(members);
         }
 
-        public ActionResult Detail(int id)
+        public ActionResult Detail(int id, bool mockHttpClient = false)
         {
-           
             MemberViewModel members = new MemberViewModel();
 
-            using (var client = new HttpClient())
+            //mockup data for unit testing
+            using (var client = mockHttpClient ? new HttpClient(mockHttpClientHandler()) : new HttpClient())
             {
                 UriBuilder builder = new UriBuilder(ConfigurationManager.AppSettings["RestApiHost"] + "/api/ShoppingItems/GetShoppingListInfoById");
 

@@ -19,5 +19,31 @@ namespace AlzaRestApiApplication.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
         }
+
+        [TestMethod]
+        public void Detail()
+        {
+            // Arrange
+            HomeController controller = new HomeController();
+
+            // Act
+            ViewResult result = controller.Detail(1, true) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void Edit()
+        {
+            // Arrange
+            HomeController controller = new HomeController();
+
+            // Act
+            ViewResult result = controller.Edit(1, true) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
     }
 }
