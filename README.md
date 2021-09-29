@@ -10,8 +10,8 @@ Solution consist of 5 individual projects
 5. AlzaRestApiApplication.Tests - Project used for Unit testing
 
 Configuration
-- Please modify appSettings in Web.config <add key="RestApiHost" value="http://localhost:63895" /> for main AlzaRestApiApplication project
-- Please modify appSettings in App.config <add key="RestApiHost" value="http://localhost:63895" /> for AlzaRestApiApplication.Tests project
+- Please modify appSettings 'RestApiHost' parameter in Web.config <add key="RestApiHost" value="http://localhost:63895" /> for main AlzaRestApiApplication project
+- Please modify appSettings 'RestApiHost' parameter in App.config <add key="RestApiHost" value="http://localhost:63895" /> for AlzaRestApiApplication.Tests project
 
 Rest Api Swagger documentation can be downloaded from link:
 
